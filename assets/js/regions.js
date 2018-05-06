@@ -54,8 +54,8 @@ function init() {
 		return objectManager;
 	}).then(function(value) {
 		  //random_color(value,"RU-MOS");
-		dataSheet={};
-		dataSheet["RU-MOS"]={"value":5};
+		dataSheet={"RU-ALT":{"value":0},"RU-AMU":{"value":1},"RU-ARK":{"value":2},"RU-AST":{"value":3},"RU-BEL":{"value":4},"RU-BRY":{"value":5},"RU-VLA":{"value":6},"RU-VGG":{"value":7},"RU-VLG":{"value":8},"RU-VOR":{"value":9},"RU-YEV":{"value":10},"RU-ZAB":{"value":11},"RU-IVA":{"value":12},"RU-IRK":{"value":13},"RU-KB":{"value":14},"RU-KGD":{"value":15},"RU-KLU":{"value":16},"RU-KAM":{"value":17},"RU-KC":{"value":18},"RU-KEM":{"value":19},"RU-KIR":{"value":20},"RU-KOS":{"value":21},"RU-KDA":{"value":22},"RU-KYA":{"value":23},"RU-KGN":{"value":24},"RU-KRS":{"value":25},"RU-LEN":{"value":26},"RU-LIP":{"value":27},"RU-MAG":{"value":28},"RU-MOS":{"value":29},"RU-MUR":{"value":30},"RU-NIZ":{"value":31},"RU-NGR":{"value":32},"RU-NVS":{"value":33},"RU-OMS":{"value":34},"RU-ORE":{"value":35},"RU-ORL":{"value":36},"RU-PNZ":{"value":37},"RU-PER":{"value":38},"RU-PRI":{"value":39},"RU-PSK":{"value":40},"RU-AD":{"value":41},"RU-AL":{"value":42},"RU-BA":{"value":43},"RU-BU":{"value":44},"RU-DA":{"value":45},"RU-IN":{"value":46},"RU-KL":{"value":47},"RU-KR":{"value":48},"RU-KO":{"value":49},"RU-ME":{"value":50},"RU-MO":{"value":51},"RU-SA":{"value":52},"RU-SE":{"value":53},"RU-TA":{"value":54},"RU-TY":{"value":55},"RU-KK":{"value":56},"RU-ROS":{"value":57},"RU-RYA":{"value":58},"RU-SAM":{"value":59},"RU-SAR":{"value":60},"RU-SAK":{"value":61},"RU-SVE":{"value":62},"RU-SMO":{"value":63},"RU-STA":{"value":64},"RU-TAM":{"value":65},"RU-TVE":{"value":66},"RU-TOM":{"value":67},"RU-TUL":{"value":68},"RU-TYU":{"value":69},"RU-UD":{"value":70},"RU-ULY":{"value":71},"RU-KHA":{"value":72},"RU-CHE":{"value":73},"RU-CE":{"value":74},"RU-CU":{"value":75},"RU-CHU":{"value":76},"RU-YAR":{"value":77},"RU-SPE":{"value":78},"RU-MOW":{"value":79},"RU-NEN":{"value":80},"RU-KHM":{"value":81},"RU-YAN":{"value":82},"RU-SEV":{"value":83},"RU-KRY":{"value":84}};
+		//dataSheet["RU-MOS"]={"value":5};
 		rule=[
 			{
 				"type": "interval",   //[leftvl,rightvl)
@@ -64,7 +64,7 @@ function init() {
 					"leftvl": 0,
 					"rightvl": 10
 					},
-				"color": random_rgba(),
+				"color": random_rgba(0.8),
 			},
 			{
 				"type": "interval",   //[leftvl,rightvl)
@@ -73,7 +73,7 @@ function init() {
 					"leftvl": 10,
 					"rightvl": 20
 					},
-				"color": random_rgba(),
+				"color": random_rgba(0.8),
 			},	
 			];
 		  
@@ -104,6 +104,11 @@ function find_color_in_arrofobj(options,rules) {
 				color=el.color;
 			}
 			break;
+		  case "identity":
+		    if (options[el.target]!=undefined) if (options[el.target]==el.properties.value){
+				color=el.color;
+			}
+		    break;
 		  default:
 			
 		}
@@ -140,14 +145,15 @@ function transform_to_obj(data){
 function random_color(objectManager,objectId) {
 	try{
 		objectManager.objects.each(function (object) {
-			object.options.fillColor=random_rgba();  
+			object.options.fillColor=random_rgba(0.8);  
 		});
 	}
 	catch(err){
 	}
 }
 
-function random_rgba() {
+function random_rgba(tr) {
     var o = Math.round, r = Math.random, s = 255;
-    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+	var ob = (tr === undefined)?r().toFixed(1):tr;
+    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + ob + ')';
 }
