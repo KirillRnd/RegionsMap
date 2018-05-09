@@ -9,5 +9,6 @@
   "author": "KirillRnd",
   "license": "ISC",
   "devDependencies": {
+    "rainbowvis.js": "^1.0.1"
   }
 }

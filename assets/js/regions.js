@@ -56,7 +56,21 @@ function init() {
 		  //random_color(value,"RU-MOS");
 		dataSheet={"RU-ALT":{"value":0},"RU-AMU":{"value":1},"RU-ARK":{"value":2},"RU-AST":{"value":3},"RU-BEL":{"value":4},"RU-BRY":{"value":5},"RU-VLA":{"value":6},"RU-VGG":{"value":7},"RU-VLG":{"value":8},"RU-VOR":{"value":9},"RU-YEV":{"value":10},"RU-ZAB":{"value":11},"RU-IVA":{"value":12},"RU-IRK":{"value":13},"RU-KB":{"value":14},"RU-KGD":{"value":15},"RU-KLU":{"value":16},"RU-KAM":{"value":17},"RU-KC":{"value":18},"RU-KEM":{"value":19},"RU-KIR":{"value":20},"RU-KOS":{"value":21},"RU-KDA":{"value":22},"RU-KYA":{"value":23},"RU-KGN":{"value":24},"RU-KRS":{"value":25},"RU-LEN":{"value":26},"RU-LIP":{"value":27},"RU-MAG":{"value":28},"RU-MOS":{"value":29},"RU-MUR":{"value":30},"RU-NIZ":{"value":31},"RU-NGR":{"value":32},"RU-NVS":{"value":33},"RU-OMS":{"value":34},"RU-ORE":{"value":35},"RU-ORL":{"value":36},"RU-PNZ":{"value":37},"RU-PER":{"value":38},"RU-PRI":{"value":39},"RU-PSK":{"value":40},"RU-AD":{"value":41},"RU-AL":{"value":42},"RU-BA":{"value":43},"RU-BU":{"value":44},"RU-DA":{"value":45},"RU-IN":{"value":46},"RU-KL":{"value":47},"RU-KR":{"value":48},"RU-KO":{"value":49},"RU-ME":{"value":50},"RU-MO":{"value":51},"RU-SA":{"value":52},"RU-SE":{"value":53},"RU-TA":{"value":54},"RU-TY":{"value":55},"RU-KK":{"value":56},"RU-ROS":{"value":57},"RU-RYA":{"value":58},"RU-SAM":{"value":59},"RU-SAR":{"value":60},"RU-SAK":{"value":61},"RU-SVE":{"value":62},"RU-SMO":{"value":63},"RU-STA":{"value":64},"RU-TAM":{"value":65},"RU-TVE":{"value":66},"RU-TOM":{"value":67},"RU-TUL":{"value":68},"RU-TYU":{"value":69},"RU-UD":{"value":70},"RU-ULY":{"value":71},"RU-KHA":{"value":72},"RU-CHE":{"value":73},"RU-CE":{"value":74},"RU-CU":{"value":75},"RU-CHU":{"value":76},"RU-YAR":{"value":77},"RU-SPE":{"value":78},"RU-MOW":{"value":79},"RU-NEN":{"value":80},"RU-KHM":{"value":81},"RU-YAN":{"value":82},"RU-SEV":{"value":83},"RU-KRY":{"value":84}};
 		//dataSheet["RU-MOS"]={"value":5};
-		var rules=define_rules(dataSheet,{"type": "identity",	"target" : "value"});
+		var rules=define_rules(dataSheet,{"type": "interval",	"target" : "value",
+			properties: {
+				number:{
+					fullnumber:4,
+					division:"defined",
+					list: [
+						{leftvl:0,rightvl:25},
+						{leftvl:25,rightvl:50},
+						{leftvl:50,rightvl:75},
+						{leftvl:75,rightvl:100},
+					],
+				},
+				type:{colortype:"gradient",color1:"rgba(173, 192, 255, 0,8)",color2:"rgba(0, 46, 194, 0,8)"}
+			}
+		});
 		  ///console.log("???");
 		manage_color(val,dataSheet,rules);
 	});
@@ -131,21 +145,25 @@ if (options.type === undefined) {
 	switch (options.type) {
 		  case "interval":
 		    
-			if (options.properties  === undefined) {rules = create_rules_interval(arrofvar,{fullnumber:4,description:"auto"},{colortype:"gradient",sorttype:"identity",color1:"rgba(173, 192, 255, 0,8)",color2:"rgba(0, 46, 194, 0,8)"})}
+			if (options.properties  === undefined) {rules = create_rules_interval(arrofvar,{fullnumber:4,division:"auto"},{colortype:"gradient",sorttype:"identity",color1:"rgba(173, 192, 255, 0,8)",color2:"rgba(0, 46, 194, 0,8)"})}
 			else {
 				var num = options.properties.number;
 				var prop = options.properties.type;
-				if (num === undefined) num = {fullnumber:4,description:"auto"};
-				if (prop === undefined) prop = {type:"gradient",color1:"rgba(173, 192, 255, 0,8)",color2:"rgba(0, 46, 194, 0,8)"};
-				rules = create_rules(arrofvar,num,prop);
+				if (num === undefined) num = {fullnumber:4,division:"auto"};
+				if (prop === undefined) prop = {colortype:"gradient",color1:"rgba(173, 192, 255, 0,8)",color2:"rgba(0, 46, 194, 0,8)"};
+				prop.target=options.target;
+				rules = create_rules_interval(arrofvar,num,prop);
 			}	
 			break;
 		  case "identity":
 		    if (options.properties  === undefined) {rules = create_rules_identity(arrofvar,{},{colortype:"random",sorttype:options})}
 			else {
-				var num = {fullnumber:arrofvar.length,devision:"auto"} ;
-				if (prop === undefined) prop = {type:"random"};
-				rules = create_rules(arrofvar,num,prop);
+				var num = {fullnumber:arrofvar.length,division:"auto"} ;
+				
+				var prop = options.properties.type;
+				if (prop === undefined) prop = {colortype:"random"};
+				prop.target=options.target;
+				rules = create_rules_identity(arrofvar,num,prop);
 			}
 			break;
 		  default:
@@ -163,15 +181,29 @@ function create_rules_identity(arrofvar,numbers,options){
 
 	switch (options.colortype){
 		case "gradient":
-			
+			var rainbow = new Rainbow(); 
+			rainbow.setNumberRange(0, numbers.fullnumber-1);
+			rainbow.setSpectrum(rgbaToHex(options.color1), rgbaToHex(options.color2));
+		
+			arrofvar.forEach(function(el,i){
+					var rgba = hexToRGBA(rainbow.colourAt(i),0.8);
+					rules.push({
+						"type": "identity",   
+						"target" : options.target,
+						"properties" :{
+							"value": el,
+							},
+						"color": rgba,
+					});
+				});
 		break;
 		case "random":
-			if (numbers.devision === undefined){
+			if (numbers.division === undefined){
 				arrofvar.forEach(function(el){
 					
 					rules.push({
 						"type": "identity",   
-						"target" : options.sorttype.target,
+						"target" : options.target,
 						"properties" :{
 							"value": el,
 							},
@@ -187,29 +219,61 @@ function create_rules_identity(arrofvar,numbers,options){
 	
  
  return rules;
-}/*
+}
 function create_rules_interval(arrofvar,numbers,options){
- if ((arrofvar===undefined)|| (numbers===undefined) || (options===undefined)) conosle.log("Incorrect callback"),return null;
- var rules = [];
+	if ((arrofvar===undefined)|| (numbers===undefined) || (options===undefined)) {
+		 console.log("Incorrect callback");
+		 return null;
+		 }
+	var rules = [];
 
-	switch (options.colortype){
-		case "gradient":
+	var list=[];
+	
+	switch (numbers.division){
+		case "auto":
 			
 		break;
-		case "random":
-			if (numbers.devision === undefined){
-				arrofvar.foreach(function(el){
-					
-					rules.push({
-						"type": "identity",   
-						"target" : options.sorttype.target,
-						"properties" :{
-							"value": el;
-							},
-						"color": random_rgba(0.8),
-					});
+		case "defined":
+			list = numbers.list;
+		break;  
+		default:
+		return;
+	 }
+	switch (options.colortype){
+		case "gradient":
+			var rainbow = new Rainbow(); 
+			rainbow.setNumberRange(0, numbers.fullnumber-1);
+			rainbow.setSpectrum(rgbaToHex(options.color1), rgbaToHex(options.color2));
+			
+			list.forEach(function(el,i){
+				var rgba = hexToRGBA(rainbow.colourAt(i),0.8);
+				rules.push({
+					"type": "interval",   
+					"target" : options.target,
+					"properties" :{
+						"leftvl": el.leftvl,
+						"rightvl": el.rightvl,
+						},
+					"color": rgba,
 				});
-			}
+			});
+		break;
+		case "random":
+			
+			
+			list.forEach(function(el){
+				
+				rules.push({
+					"type": "interval",   
+					"target" : options.target,
+					"properties" :{
+						"leftvl": el.leftvl,
+						"rightvl": el.rightvl,
+						},
+					"color": random_rgba(0.8),
+				});
+			});
+			
 		break;  
 		default:
 		return;
@@ -218,7 +282,7 @@ function create_rules_interval(arrofvar,numbers,options){
 	
  
  return rules;
-}*/
+}
 function random_color(objectManager,objectId) {
 	try{
 		objectManager.objects.each(function (object) {
@@ -231,6 +295,26 @@ function random_color(objectManager,objectId) {
 
 function random_rgba(tr) {
     var o = Math.round, r = Math.random, s = 255;
-	var ob = (tr === undefined)?r().toFixed(1):tr;
-    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + ob + ')';
+	var op = (tr === undefined)?r().toFixed(1):tr;
+    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + op + ')';
+}
+function hexToRGBA(hex, opacity) {
+    return 'rgba(' + (hex = hex.replace('#', '')).match(new RegExp('(.{' + hex.length/3 + '})', 'g')).map(function(l) { return parseInt(hex.length%2 ? l+l : l, 16) }).concat(opacity||1).join(',') + ')';
+}
+function trim (str) {
+  return str.replace(/^\s+|\s+$/gm,'');
+}
+
+function rgbaToHex (rgba) {
+    var parts = rgba.substring(rgba.indexOf("(")).split(","),
+        r = parseInt(trim(parts[0].substring(1)), 10),
+        g = parseInt(trim(parts[1]), 10),
+        b = parseInt(trim(parts[2]), 10),
+        a = parseFloat(trim(parts[3].substring(0, parts[3].length - 1))).toFixed(2);
+
+		r=r.toString(16);
+		g=g.toString(16);
+		b=b.toString(16);
+		
+    return ('#' + ((r.length == 2)?"":"0") + r + ((g.length == 2)?"":"0") + g + ((b.length == 2)?"":"0")+ b /*+ (a * 255).toString(16).substring(0,2)*/);
 }
