@@ -60,13 +60,8 @@ function init() {
 			properties: {
 				number:{
 					fullnumber:4,
-					division:"defined",
-					list: [
-						{leftvl:0,rightvl:25},
-						{leftvl:25,rightvl:50},
-						{leftvl:50,rightvl:75},
-						{leftvl:75,rightvl:100},
-					],
+					division:"auto",
+					
 				},
 				type:{colortype:"gradient",color1:"rgba(173, 192, 255, 0,8)",color2:"rgba(0, 46, 194, 0,8)"}
 			}
@@ -230,19 +225,36 @@ function create_rules_interval(arrofvar,numbers,options){
 	var list=[];
 	
 	switch (numbers.division){
-		case "auto":
-			
+		case "auto": 	//на равные размеры
+			var size = Math.floor(arrofvar.length/numbers.fullnumber);
+			arrofvar.sort(function(a, b) {
+				return a - b;
+			});
+			for (i=0;i<numbers.fullnumber-1;i++){	
+				list.push({leftvl:arrofvar[i*size],rightvl:arrofvar[(i+1)*size],});
+			}
+			list.push({leftvl:arrofvar[i*size],rightvl:arrofvar[arrofvar.length-1],});//азбивается неравномерно, последний всегда остается немного больше
 		break;
-		case "defined":
+		case "step":	//с заданным шагом
+			var max = arrofvar.max();
+			var min = arrofvar.min();
+			var lv = min;
+			var step = numbers.step;
+			while(lv < max) {
+			  list.push({leftvl:lv,rightvl:lv+step,});
+			  lv+=step;
+			}
+		break;
+		case "defined": //пользовательские
 			list = numbers.list;
 		break;  
 		default:
 		return;
 	 }
 	switch (options.colortype){
-		case "gradient":
+		case "gradient"://градиентная раскраска
 			var rainbow = new Rainbow(); 
-			rainbow.setNumberRange(0, numbers.fullnumber-1);
+			rainbow.setNumberRange(0, list.length-1);
 			rainbow.setSpectrum(rgbaToHex(options.color1), rgbaToHex(options.color2));
 			
 			list.forEach(function(el,i){
@@ -258,7 +270,7 @@ function create_rules_interval(arrofvar,numbers,options){
 				});
 			});
 		break;
-		case "random":
+		case "random"://случайная раскраска
 			
 			
 			list.forEach(function(el){
@@ -318,3 +330,13 @@ function rgbaToHex (rgba) {
 		
     return ('#' + ((r.length == 2)?"":"0") + r + ((g.length == 2)?"":"0") + g + ((b.length == 2)?"":"0")+ b /*+ (a * 255).toString(16).substring(0,2)*/);
 }
+
+Array.prototype.max = function(){
+
+    return Math.max.apply( Math, this );
+
+};
+
+Array.prototype.min = function(){
+    return Math.min.apply( Math, this);
+};
