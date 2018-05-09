@@ -9,6 +9,7 @@ geojson = {
 }
 var objectManager;
 var dataSheet;
+var dataSin={"RU-ALT":["Алтайский край","22"],"RU-AMU":["Амурская область","28"]};
 ymaps.ready(init);
 
 
@@ -339,4 +340,12 @@ Array.prototype.max = function(){
 
 Array.prototype.min = function(){
     return Math.min.apply( Math, this);
+};
+
+String.prototype.synonymsId = function(data){
+	for (key in data) {
+		if (data[key].indexOf(String(this)) != -1) return key;
+//console.log(String(this));
+	}		
+    return null;
 };
