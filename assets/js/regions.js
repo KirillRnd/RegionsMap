@@ -62,15 +62,13 @@ function init() {
 				number:{
 					fullnumber:4,
 					division:"auto",
-					
 				},
 				type:{colortype:"gradient",color1:"rgba(173, 192, 255, 0,8)",color2:"rgba(0, 46, 194, 0,8)"}
 			}
 		});
 		  ///console.log("???");
-		manage_color(val,dataSheet,rules);
+		//manage_color(val,dataSheet,rules);
 	});
-	 myMap.geoObjects.add(objectManager);
 
    /* $.ajax({
         // В файле data.json заданы геометрия, опции и данные меток .
