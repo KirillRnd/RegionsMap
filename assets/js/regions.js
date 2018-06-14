@@ -55,7 +55,7 @@ function init() {
 		return objectManager;
 	}).then(function(val) {
 		  //random_color(value,"RU-MOS");
-		dataSheet={"RU-ALT":{"value":0},"RU-AMU":{"value":1},"RU-ARK":{"value":2},"RU-AST":{"value":3},"RU-BEL":{"value":4},"RU-BRY":{"value":5},"RU-VLA":{"value":6},"RU-VGG":{"value":7},"RU-VLG":{"value":8},"RU-VOR":{"value":9},"RU-YEV":{"value":10},"RU-ZAB":{"value":11},"RU-IVA":{"value":12},"RU-IRK":{"value":13},"RU-KB":{"value":14},"RU-KGD":{"value":15},"RU-KLU":{"value":16},"RU-KAM":{"value":17},"RU-KC":{"value":18},"RU-KEM":{"value":19},"RU-KIR":{"value":20},"RU-KOS":{"value":21},"RU-KDA":{"value":22},"RU-KYA":{"value":23},"RU-KGN":{"value":24},"RU-KRS":{"value":25},"RU-LEN":{"value":26},"RU-LIP":{"value":27},"RU-MAG":{"value":28},"RU-MOS":{"value":29},"RU-MUR":{"value":30},"RU-NIZ":{"value":31},"RU-NGR":{"value":32},"RU-NVS":{"value":33},"RU-OMS":{"value":34},"RU-ORE":{"value":35},"RU-ORL":{"value":36},"RU-PNZ":{"value":37},"RU-PER":{"value":38},"RU-PRI":{"value":39},"RU-PSK":{"value":40},"RU-AD":{"value":41},"RU-AL":{"value":42},"RU-BA":{"value":43},"RU-BU":{"value":44},"RU-DA":{"value":45},"RU-IN":{"value":46},"RU-KL":{"value":47},"RU-KR":{"value":48},"RU-KO":{"value":49},"RU-ME":{"value":50},"RU-MO":{"value":51},"RU-SA":{"value":52},"RU-SE":{"value":53},"RU-TA":{"value":54},"RU-TY":{"value":55},"RU-KK":{"value":56},"RU-ROS":{"value":57},"RU-RYA":{"value":58},"RU-SAM":{"value":59},"RU-SAR":{"value":60},"RU-SAK":{"value":61},"RU-SVE":{"value":62},"RU-SMO":{"value":63},"RU-STA":{"value":64},"RU-TAM":{"value":65},"RU-TVE":{"value":66},"RU-TOM":{"value":67},"RU-TUL":{"value":68},"RU-TYU":{"value":69},"RU-UD":{"value":70},"RU-ULY":{"value":71},"RU-KHA":{"value":72},"RU-CHE":{"value":73},"RU-CE":{"value":74},"RU-CU":{"value":75},"RU-CHU":{"value":76},"RU-YAR":{"value":77},"RU-SPE":{"value":78},"RU-MOW":{"value":79},"RU-NEN":{"value":80},"RU-KHM":{"value":81},"RU-YAN":{"value":82},"RU-SEV":{"value":83},"RU-KRY":{"value":84}};
+		dataSheet=[{NameId: "RU-ALT", value: 0},{NameId: "RU-AMU", value: 1},{NameId: "RU-ARK", value: 2},{NameId: "RU-AST", value: 3},{NameId: "RU-BEL", value: 4},{NameId: "RU-BRY", value: 5},{NameId: "RU-VLA", value: 6},{NameId: "RU-VGG", value: 7},{NameId: "RU-VLG", value: 8},{NameId: "RU-VOR", value: 9},{NameId: "RU-YEV", value: 10},{NameId: "RU-ZAB", value: 11},{NameId: "RU-IVA", value: 12},{NameId: "RU-IRK", value: 13},{NameId: "RU-KB", value: 14},{NameId: "RU-KGD", value: 15},{NameId: "RU-KLU", value: 16},{NameId: "RU-KAM", value: 17},{NameId: "RU-KC", value: 18},{NameId: "RU-KEM", value: 19},{NameId: "RU-KIR", value: 20},{NameId: "RU-KOS", value: 21},{NameId: "RU-KDA", value: 22},{NameId: "RU-KYA", value: 23},{NameId: "RU-KGN", value: 24},{NameId: "RU-KRS", value: 25},{NameId: "RU-LEN", value: 26},{NameId: "RU-LIP", value: 27},{NameId: "RU-MAG", value: 28},{NameId: "RU-MOS", value: 29},{NameId: "RU-MUR", value: 30},{NameId: "RU-NIZ", value: 31},{NameId: "RU-NGR", value: 32},{NameId: "RU-NVS", value: 33},{NameId: "RU-OMS", value: 34},{NameId: "RU-ORE", value: 35},{NameId: "RU-ORL", value: 36},{NameId: "RU-PNZ", value: 37},{NameId: "RU-PER", value: 38},{NameId: "RU-PRI", value: 39},{NameId: "RU-PSK", value: 40},{NameId: "RU-AD", value: 41},{NameId: "RU-AL", value: 42},{NameId: "RU-BA", value: 43},{NameId: "RU-BU", value: 44},{NameId: "RU-DA", value: 45},{NameId: "RU-IN", value: 46},{NameId: "RU-KL", value: 47},{NameId: "RU-KR", value: 48},{NameId: "RU-KO", value: 49},{NameId: "RU-ME", value: 50},{NameId: "RU-MO", value: 51},{NameId: "RU-SA", value: 52},{NameId: "RU-SE", value: 53},{NameId: "RU-TA", value: 54},{NameId: "RU-TY", value: 55},{NameId: "RU-KK", value: 56},{NameId: "RU-ROS", value: 57},{NameId: "RU-RYA", value: 58},{NameId: "RU-SAM", value: 59},{NameId: "RU-SAR", value: 60},{NameId: "RU-SAK", value: 61},{NameId: "RU-SVE", value: 62},{NameId: "RU-SMO", value: 63},{NameId: "RU-STA", value: 64},{NameId: "RU-TAM", value: 65},{NameId: "RU-TVE", value: 66},{NameId: "RU-TOM", value: 67},{NameId: "RU-TUL", value: 68},{NameId: "RU-TYU", value: 69},{NameId: "RU-UD", value: 70},{NameId: "RU-ULY", value: 71},{NameId: "RU-KHA", value: 72},{NameId: "RU-CHE", value: 73},{NameId: "RU-CE", value: 74},{NameId: "RU-CU", value: 75},{NameId: "RU-CHU", value: 76},{NameId: "RU-YAR", value: 77},{NameId: "RU-SPE", value: 78},{NameId: "RU-MOW", value: 79},{NameId: "RU-NEN", value: 80},{NameId: "RU-KHM", value: 81},{NameId: "RU-YAN", value: 82},{NameId: "RU-SEV", value: 83},{NameId: "RU-KRY", value: 84}];
 		//dataSheet["RU-MOS"]={"value":5};
 		var rules=define_rules(dataSheet,{"type": "interval",	"target" : "value",
 			properties: {
@@ -67,7 +67,24 @@ function init() {
 			}
 		});
 		  ///console.log("???");
-		//manage_color(val,dataSheet,rules);
+		manage_color(val,dataSheet,rules);
+		$("#jsGrid").jsGrid({
+        width: "100%",
+        height: "400px",
+ 
+        inserting: true,
+        editing: true,
+        sorting: true,
+        paging: true,
+ 
+        data: dataSheet,
+ 
+        fields: [
+            { name: "NameId", type: "text", width: 150},
+            { name: "value", type: "number", width: 50 },
+            { type: "control" }
+        ]
+    });
 	});
 
    /* $.ajax({
@@ -106,10 +123,22 @@ function find_color_in_arrofobj(options,rules) {
 }
 
 function manage_color(objectManager,data,rules) {
-	
+	function LookingForId(array1, NameId) {
+	  var ans = null;
+	  array1.forEach(function(element) {
+		  if (element["NameId"]==NameId){
+			 ans = element;
+		  }
+	  });
+	  return ans;
+	}
+
 	objectManager.objects.each(function (object) {
-		var NeccColor = find_color_in_arrofobj(data[object.id],rules);
-		object.options.fillColor=(NeccColor===undefined)?"rgb(200,200,200)":NeccColor;  
+		var objArr=LookingForId(data,object.id);
+		if (objArr != null){
+			var NeccColor = find_color_in_arrofobj(objArr,rules);
+		    object.options.fillColor=(NeccColor===undefined)?"rgb(200,200,200)":NeccColor; 
+		} 
 	});
 	
 }
@@ -133,9 +162,12 @@ if (options.type === undefined) {
 	}
 	
 	var arrofvar=[];
-			for (var key in data) {
+			/*for (var key in data) {
 			    if (arrofvar.indexOf(data[key][options.target]) == -1) arrofvar.push(data[key][options.target]);//добавлены все виды данной переменной
-			}	
+			}	*/
+			data.forEach(function(element) {
+				if (arrofvar.indexOf(element[options.target]) == -1) arrofvar.push(element[options.target]);
+			});
 	switch (options.type) {
 		  case "interval":
 		    
